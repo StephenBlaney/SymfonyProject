@@ -8,8 +8,26 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
-class BibController
+use AppBundle\BibRepository;
+
+class BibController extends Controller
 {
+    /**
+     * @Route("/bibs/list")
+     */
 
+    public function listAction(Request $request)
+    {
+        $bibRepository = new BibRepository();
+        $bibs = $bibRepository->getAll();
+        $argsArray = [
+            'bibs' => $bibs
+        ];
+        $templateName = 'bib/list';
+        return $this->render($templateName . '.html.twig', $argsArray);
+    }
 }
