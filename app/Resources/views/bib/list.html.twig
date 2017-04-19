@@ -1,0 +1,19 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}list of bibs{% endblock %}
+
+{% block body %}
+
+    {{ dump() }}
+
+    <ul>
+        {% for bib in bibs %}
+            <li>
+                id = {{ bib.id }}
+                <br>
+                name = {{ bib.name }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
