@@ -11,7 +11,10 @@
             <li>
                 id = {{ bib.id }}
                 <br>
-                name = {{ bib.name }}
+                name =
+                <a href="{{ path('bibs_show', {id:student.id}) }}">
+                {{ bib.name }}
+                </a>
             </li>
         {% endfor %}
     </ul>
