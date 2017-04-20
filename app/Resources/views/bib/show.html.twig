@@ -1,0 +1,18 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}show one student{% endblock %}
+
+{% block body %}
+
+    <h1>Show one Reference</h1>
+
+    <p>
+        id = {{ bib.id }}
+
+    <p>
+        name = {{ bib.name }}
+
+    <hr>
+    <a href="{{ path('bib_list') }}">list of bib</a>
+
+{% endblock %}
