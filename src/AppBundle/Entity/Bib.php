@@ -22,30 +22,20 @@ class Bib
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    
+
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
 
-
     private $name;
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
 
-    public function __construct($id, $name){
-        $this->id = $id;
-        $this->name = $name;
-    }
+
+
     public function getId()
     {
         return $this->id;
-    }
-    public function getName()
-    {
-        return $this->name;
     }
 
 
@@ -62,4 +52,11 @@ class Bib
 
         return $this;
     }
+
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }
