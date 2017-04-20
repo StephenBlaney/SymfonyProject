@@ -11,27 +11,30 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-use AppBundle\BibRepository;
+use AppBundle\Entity\Bib;
 
 class BibController extends Controller
 {
     /**
-     * @Route("/bibs/list")
+     * @Route("/bibs/list", name="bibs_list")
      */
 
     public function listAction(Request $request)
     {
-        $bibRepository = new BibRepository();
-        $bibs = $bibRepository->getAll();
+        $bibRepository = $this->getDoctrine()->getRepository('AppBundle:Bib');
+        $bibs = $bibRepository->findAll();
+
         $argsArray = [
             'bibs' => $bibs
         ];
         $templateName = 'bib/list';
         return $this->render($templateName . '.html.twig', $argsArray);
     }
+
     /**
-     * @Route("/bib/create/{name}", name="bib_create")
+     * @Route("/bibs/create/{name}", name="bib_create")
      */
     public function createAction($name)
     {
