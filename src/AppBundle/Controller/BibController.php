@@ -106,14 +106,22 @@ class BibController extends Controller
     /**
      * @Route("/bibs/processNewForm", name="bibs_process_new_form")
      */
-
     public function processNewFormAction(Request $request)
     {
         // extract 'name' parameter from POST data
         $name = $request->request->get('name');
+        if(empty($name)){
+            $this->addFlash(
+                'error',
+                'student name cannot be an empty string'
+            );
+            // forward this to the createAction() method
+            return $this->newFormAction($request);
+        }
         // forward this to the createAction() method
         return $this->createAction($name);
     }
+
     /**
      * @Route("/bibs/show/{id}", name="bibs_show")
      */
@@ -129,7 +137,7 @@ class BibController extends Controller
         $argsArray = [
             'student' => $bib
         ];
-        $templateName = 'bibs/show';
+        $templateName = 'bib/show';
         return $this->render($templateName . '.html.twig', $argsArray);
     }
 
