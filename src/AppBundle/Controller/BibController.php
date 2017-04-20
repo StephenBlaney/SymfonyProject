@@ -98,7 +98,40 @@ class BibController extends Controller
     {
         $argsArray = [
         ];
-        $templateName = 'bibs/new';
+
+        $templateName = 'bib/new';
         return $this->render($templateName . '.html.twig', $argsArray);
     }
+
+    /**
+     * @Route("/bibs/processNewForm", name="bibs_process_new_form")
+     */
+
+    public function processNewFormAction(Request $request)
+    {
+        // extract 'name' parameter from POST data
+        $name = $request->request->get('name');
+        // forward this to the createAction() method
+        return $this->createAction($name);
+    }
+    /**
+     * @Route("/bibs/show/{id}", name="bibs_show")
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bib = $em->getRepository('AppBundle:Bib')->find($id);
+        if (!$bib) {
+            throw $this->createNotFoundException(
+                'No student found for id '.$id
+            );
+        }
+        $argsArray = [
+            'student' => $bib
+        ];
+        $templateName = 'bibs/show';
+        return $this->render($templateName . '.html.twig', $argsArray);
+    }
+
+
 }
