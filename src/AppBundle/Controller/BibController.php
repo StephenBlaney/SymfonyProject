@@ -13,6 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 use AppBundle\Entity\Bib;
 
 class BibController extends Controller
@@ -33,10 +36,6 @@ class BibController extends Controller
         return $this->render($templateName . '.html.twig', $argsArray);
     }
 
-    /**
-     * @Route("/bibs/create/{name}", name="bib_create")
-     */
-
     public function createAction($name)
     {
         $bib = new Bib();
@@ -48,7 +47,8 @@ class BibController extends Controller
         $em->persist($bib);
         // actually executes the queries (i.e. the INSERT query)
         $em->flush();
-        return new Response('Created new student with id '.$bib->getId());
+
+        return $this->redirectToRoute('bibs_list');
     }
 
     /**
@@ -92,18 +92,6 @@ class BibController extends Controller
 }
 
     /**
-     * @Route("/bibs/new", name="bibs_new_form")
-     */
-    public function newFormAction(Request $request)
-    {
-        $argsArray = [
-        ];
-
-        $templateName = 'bib/new';
-        return $this->render($templateName . '.html.twig', $argsArray);
-    }
-
-    /**
      * @Route("/bibs/processNewForm", name="bibs_process_new_form")
      */
     public function processNewFormAction(Request $request)
@@ -135,11 +123,38 @@ class BibController extends Controller
             );
         }
         $argsArray = [
-            'student' => $bib
+            'bib' => $bib
         ];
         $templateName = 'bib/show';
         return $this->render($templateName . '.html.twig', $argsArray);
     }
 
 
+    /**
+     * @Route("/bibs/new", name="bibs_new_form")
+     */
+    public function newFormAction(Request $request)
+    {
+        // create a task and give it some dummy data for this example
+        $bib = new Bib();
+        $form = $this->createFormBuilder($bib)
+            ->add('name', TextType::class)
+            ->add('save', SubmitType::class, array('label' => 'Create Bib'))
+            ->getForm();
+
+
+        /// ---- start processing POST submission of form
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $bib = $form->getData();
+            $name = $bib->getName();
+            return $this->createAction($name);
+        }
+        $argsArray = [
+            'form' => $form->createView(),
+        ];
+
+        $templateName = 'bib/new';
+        return $this->render($templateName . '.html.twig', $argsArray);
+    }
 }
