@@ -36,6 +36,7 @@ class BibController extends Controller
     /**
      * @Route("/bibs/create/{name}", name="bib_create")
      */
+    
     public function createAction($name)
     {
         $bib = new Bib();
@@ -48,5 +49,27 @@ class BibController extends Controller
         // actually executes the queries (i.e. the INSERT query)
         $em->flush();
         return new Response('Created new student with id '.$bib->getId());
+    }
+
+    /**
+     * @Route("/bibs/delete/{id}", name="bibs_delete")
+     */
+    public function deleteAction($id)
+    {
+        // entity manager
+        $em = $this->getDoctrine()->getManager();
+        $bibRepository = $em->getRepository('AppBundle:Bib');
+        // find thge student with this ID
+        $bib = $bibRepository->find($id);
+        if (!$bib) {
+            throw $this->createNotFoundException(
+                'No bib found for id '.$id
+            );
+        }
+        // tells Doctrine you want to (eventually) delete the Student (no queries yet)
+        $em->remove($bib);
+        // actually executes the queries (i.e. the INSERT query)
+        $em->flush();
+        return new Response('Deleted bib with id '.$id);
     }
 }
