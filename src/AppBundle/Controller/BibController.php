@@ -90,4 +90,15 @@ class BibController extends Controller
 
     return $this->redirectToRoute('bibs_list');
 }
+
+    /**
+     * @Route("/bibs/new", name="bibs_new_form")
+     */
+    public function newFormAction(Request $request)
+    {
+        $argsArray = [
+        ];
+        $templateName = 'bibs/new';
+        return $this->render($templateName . '.html.twig', $argsArray);
+    }
 }
