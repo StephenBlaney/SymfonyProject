@@ -1,10 +1,10 @@
 {% extends '_base.html.twig' %}
 
-{% block pageTitle %}new reference form% endblock %}
+{% block pageTitle %}new student form {% endblock %}
 
     {% block body %}
 
-        <h1>Create new reference</h1>
+        <h1>Create new student</h1>
 
 
         <form action="/bibs/processNewForm" method="POST">
@@ -12,7 +12,7 @@
             <input type="text" name="name">
 
             <p>
-                <input type="submit" value="Create new reference">
+                <input type="submit" value="Create new student">
         </form>
 
 
