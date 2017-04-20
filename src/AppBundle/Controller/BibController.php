@@ -30,4 +30,20 @@ class BibController extends Controller
         $templateName = 'bib/list';
         return $this->render($templateName . '.html.twig', $argsArray);
     }
+    /**
+     * @Route("/bib/create/{name}", name="bib_create")
+     */
+    public function createAction($name)
+    {
+        $bib = new Bib();
+        $bib->setName($name);
+
+        // entity manager
+        $em = $this->getDoctrine()->getManager();
+        // tells Doctrine you want to (eventually) save the Student (no queries yet)
+        $em->persist($bib);
+        // actually executes the queries (i.e. the INSERT query)
+        $em->flush();
+        return new Response('Created new student with id '.$bib->getId());
+    }
 }
