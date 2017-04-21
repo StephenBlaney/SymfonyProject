@@ -10,9 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Basket controller.
  *
- * @Route("basket")
+ * @Route("reference")
  */
-class BasketController extends Controller
+class ReferenceController extends Controller
 {
     /**
      * Lists all basket entities.
