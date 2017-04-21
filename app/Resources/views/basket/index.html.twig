@@ -5,7 +5,6 @@
 
 
 {% block stylesheets %}
-    @import '/css/table.css';
 {% endblock %}
 
 {% block body %}
@@ -35,6 +34,9 @@
                         </li>
                         <li>
                             <a href="{{ path('basket_edit', { 'id': basket.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('basket_add', { 'id': basket.id }) }}">add to basket</a>
                         </li>
                     </ul>
                 </td>
