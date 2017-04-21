@@ -1,4 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends '_base.html.twig' %}
+
+
+{% block pageTitle %}list all electives{% endblock %}
+
+
+{% block stylesheets %}
+    @import '/css/table.css';
+{% endblock %}
 
 {% block body %}
     <h1>Baskets list</h1>
