@@ -29,6 +29,15 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+
+    <ul>
+        <li>
+            <a href="{{ path('bibs_list') }}">list of references</a>
+        </li>
+        <li>
+            <a href="{{ path('reference_basket_index') }}">list of elective modules</a>
+        </li>
+    </ul>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
