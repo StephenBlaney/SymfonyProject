@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Baskets list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Referencecode</th>
+                <th>Referencetitle</th>
+                <th>Submittedby</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for basket in baskets %}
+            <tr>
+                <td><a href="{{ path('basket_show', { 'id': basket.id }) }}">{{ basket.id }}</a></td>
+                <td>{{ basket.referenceCode }}</td>
+                <td>{{ basket.referenceTitle }}</td>
+                <td>{{ basket.submittedBy }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('basket_show', { 'id': basket.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('basket_edit', { 'id': basket.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('basket_new') }}">Create a new basket</a>
+        </li>
+    </ul>
+{% endblock %}

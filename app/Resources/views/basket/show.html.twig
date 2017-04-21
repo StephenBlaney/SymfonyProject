@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Basket</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ basket.id }}</td>
+            </tr>
+            <tr>
+                <th>Referencecode</th>
+                <td>{{ basket.referenceCode }}</td>
+            </tr>
+            <tr>
+                <th>Referencetitle</th>
+                <td>{{ basket.referenceTitle }}</td>
+            </tr>
+            <tr>
+                <th>Submittedby</th>
+                <td>{{ basket.submittedBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('basket_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('basket_edit', { 'id': basket.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
