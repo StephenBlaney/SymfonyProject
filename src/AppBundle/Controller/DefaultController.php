@@ -18,7 +18,7 @@ class DefaultController extends Controller
             'foreground' => 'blue',
             'background' => 'pink'
         ];
-        
+
         // store colours in session 'colours'
         $session = new Session();
         $session->set('colours', $colours);
