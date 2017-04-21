@@ -1,3 +1,14 @@
+{% set colours = app.session.get('colours') %}
+
+{# default = blue #}
+{% if colours is null %}
+    {% set colours = {
+    'foreground': 'blue',
+    'background': 'pink'
+    }
+    %}
+{% endif %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,6 +19,12 @@
             @import '/css/table.css';
             {% block stylesheets %}
             {% endblock %}
+
+            body {
+                color: {{ colours['foreground'] }};
+                background-color: {{ colours['background'] }};
+            }
+
         </style>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
