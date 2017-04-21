@@ -1,0 +1,42 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}list of electives{% endblock %}
+
+{% block body %}
+
+    {% set basket_references = app.session.get('basket') %}
+
+    {{ dump(app.session.get('basket')) }}
+
+    <h1>List of References in Bibliography</h1>
+    <hr>
+
+    {% if basket_references is null %}
+        <p>
+            you have no electives in your basket
+        </p>
+
+    {% else %}
+        <ul>
+            {% for basket in basket_references %}
+                <li>
+                    id = {{ basket.id }}
+                    <br>
+                    Reference Code = {{ basket.referenceCode}}
+                    <br>
+                    Reference Title = {{ basket.referenceTitle }}
+                    <br>
+                    Submitted By = {{ basket.submittedBy }}
+                    <br>
+                    <a href="{{ path('reference_basket_delete', { 'id': basket.id }) }}">(remove)</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <p>
+        <a href="{{ path('reference_basket_clear') }}">CLEAR all items in basket</a>
+    </p>
+
+{% endblock %}
